@@ -7,6 +7,7 @@ import "core:strconv"
 day1 :: proc(input: string) {
     fmt.println("Day 1")
     calories := day1_proccess_input(input)
+    defer free(&calories)
     day1_part1(calories)
     day1_part2(calories)
     fmt.println("----------------------------------")
@@ -37,7 +38,7 @@ day1_part1 :: proc(calories: [dynamic]int) {
         }
     }
 
-    fmt.println("Top calorie: ", max)
+    fmt.println("Part 1: ", max)
 }
 
 day1_part2 :: proc(calories: [dynamic]int) {
@@ -52,5 +53,5 @@ day1_part2 :: proc(calories: [dynamic]int) {
         }
     }
 
-    fmt.println("Top 3 calories: ", max1 + max2 + max3)
+    fmt.println("Part 2: ", max1 + max2 + max3)
 }
