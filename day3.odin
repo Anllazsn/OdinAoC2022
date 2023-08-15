@@ -7,7 +7,7 @@ import "core:strconv"
 day3 :: proc(input: string) {
     fmt.println("Day 3")
     rucksacks := day3_proccess_input(input)
-    defer free(&rucksacks)
+    defer delete(rucksacks)
     day3_part1(rucksacks)
     day3_part2(rucksacks)
     fmt.println("----------------------------------")
@@ -45,22 +45,27 @@ day3_part1 :: proc(rucksacks: [dynamic]string) {
 }
 
 day3_part2 :: proc(rucksacks: [dynamic]string) {
-    score := 0
-    // for strat, _ in rucksacks {
-    //     switch strat {
-    //         case "A X": score += SCISSOR + LOSE 
-    //         case "A Y": score += ROCK + DRAW
-    //         case "A Z": score += PAPER + WIN
-    //         case "B X": score += ROCK + LOSE
-    //         case "B Y": score += PAPER + DRAW
-    //         case "B Z": score += SCISSOR + WIN
-    //         case "C X": score += PAPER + LOSE
-    //         case "C Y": score += SCISSOR + DRAW
-    //         case "C Z": score += ROCK + WIN
-    //     }
-    // }
+    badge := 0
+    for i := 0; i < len(rucksacks); i += 1 {
+        one   := rucksacks[i]
+        two   := rucksacks[i+1]
+        three := rucksacks[i+2]
+        i += 2 // Update i
 
-    fmt.println("Part 2: ", score)
+        rune_badge: for rune_one in one {
+            for rune_two in two {
+                for rune_three in three {
+                    if rune_one == rune_two && rune_one == rune_three {
+                        badge += rune_to_priority(rune_one)
+                        break rune_badge
+                    }
+                }
+            }
+        }
+
+    }
+
+    fmt.println("Part 2: ", badge)
 }
 
 rune_to_priority :: proc(letter: rune) -> int {

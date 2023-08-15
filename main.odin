@@ -18,4 +18,5 @@ main :: proc() {
     day1(readFile("inputs/day1.txt"))
     day2(readFile("inputs/day2.txt"))
     day3(readFile("inputs/day3.txt"))
+    day4(readFile("inputs/day4.txt"))
 }

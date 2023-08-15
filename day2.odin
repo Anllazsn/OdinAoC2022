@@ -15,7 +15,7 @@ WIN :: 6
 day2 :: proc(input: string) {
     fmt.println("Day 2")
     strategies := day2_proccess_input(input)
-    defer free(&strategies)
+    defer delete(strategies)
     day2_part1(strategies)
     day2_part2(strategies)
     fmt.println("----------------------------------")
